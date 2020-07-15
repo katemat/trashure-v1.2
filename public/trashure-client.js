@@ -148,7 +148,7 @@ function getMap() {
       ),
       zoom: 12,
       credentials:
-        'Ap77Q31MJhCP2ZZX2OklF0nVKFIP2AhgxeChi6y2pEvjGmJhN5xM-h1J39gwaSAX',
+        'AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw',
     });
 
     var center = map.getCenter();
