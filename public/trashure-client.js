@@ -146,7 +146,7 @@ function getMap() {
         userLocation.latitude,
         userLocation.longitude
       ),
-      zoom: 10,
+      zoom: 12,
     });
 
     var center = map.getCenter();
@@ -177,9 +177,12 @@ function getMap() {
             var location = { latitude: data.lat, longitude: data.long };
             pin = new Microsoft.Maps.Pushpin(location, {
               title: data.name,
-              text: `${data.id}`,
+              //   text: `${data.id}`,
               icon: 'rd-pin.png',
             });
+            pin.metadata = {
+              id: data.id,
+            };
             map.entities.push(pin);
 
             // Handles the click event of a pin, note changes textContent of Div to display it
