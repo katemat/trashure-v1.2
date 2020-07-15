@@ -1,8 +1,8 @@
-# Trashure App, v. 1.0.0
+# Trashure App, v.1.2
 
 ## Team Project
 
-[Try it now](https://trashure.herokuapp.com/)
+[Try it now](https://trashure-app.herokuapp.com/)
 
 ### Overview
 
