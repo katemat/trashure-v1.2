@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class='page-nav'> 
+        <div class="nav-item"><a href="/"><img class='nav-icon' src="images/map.png"><p>Home</p></a></div>
+        <div class="nav-item"><a href="/myitems"><img class='nav-icon' src="images/treasure-chest.png"><p>My Trashure</p></a></div>
+        <div class="nav-item"><a href="/item"><img class='nav-icon' src="images/new.png"><p>New Trashure</p></a></div>
+    </nav>
+    <h2 class="view-items">View my items</h2>
+
+    <% items.forEach(function(item){ %>
+        <div class = "my-items-box">
+            <img src="<%= item.image_url%>" alt="">
+            <% if (item.status === "reserved") { %>
+                <div class = "item-box-text">
+            <% } else { %>
+                <div class = "item-box-text reserved">
+            <% } %>
+                <p >Name: <%= item.name %></p>
+                <p>Item type: <%= item.item_type %></p>
+                <p>Pickup date: <%= item.pickup_date %></p>
+                <p>Item status: <%= item.status %></p>
+                <p>Item address: <%= item.address %></p>
+            </div>
+            <div>
+                <form action="/item/<%= item.id %>">
+                    <button>update</button>
+                </form>
+            </div>
+        </div>
+    <% }); %>
+    
+    <h2 class="view-items">Reserved</h2>
+
+    <% reservations.forEach(function(res){ %>
+        <div class = "my-items-box">
+            <img src="<%= res.image_url%>" alt="">
+            <div class = "item-box-text">
+                <p>Name: <%= res.name %></p>
+                <p>Address: <%= res.Address %></p>
+                <p>Pickup date: <%= res.pickup_date %></p>
+                <p>Pickup time: <%= res.pickup_time %></p>
+            </div>
+            <form action="/reservation/delete" method="post">
+                <input type="hidden" name="item_id" class="delete-trashure-item-id" value="<%= res.item_id %>">
+                <button class="unreserve-btn hidden">Unreserve Trashure</button>
+            </form> 
+        </div>
+    <% }) %>
+</body>
+</html>
+

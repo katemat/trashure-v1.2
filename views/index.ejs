@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type='text/javascript'
+            src='http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw' 
+            async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <header>
+        <section class='header-title'>
+                <h1>Trashure</h1>
+                
+                <% if (!user) { %>
+                    <div class = "buttons">
+                        <form action="/signup">
+                            <button>SIGN UP</button>
+                        </form>
+                        <form action="/login">
+                            <button>LOG IN</button>
+                        </form>
+                    </div>
+                <% } else { %>
+                    <p class="user-name">Hello, <%= user.username %>.</p>
+                    <form action="/logout">
+                        <button>LOG OUT</button>
+                    </form>
+                <% } %>
+                
+        </section>
+       <nav class='main-nav'> 
+         <div class="nav-item"><a href="/"><img class='nav-icon' src="images/map.png"><p>Home</p></a></div>
+        <div class="nav-item"><a href="/myitems"><img class='nav-icon' src="images/treasure-chest.png"><p>My Trashure</p></a></div>
+        <div class="nav-item"><a href="/item"><img class='nav-icon' src="images/new.png"><p>New Trashure</p></a></div>
+
+       </nav>
+
+    </header>
+    <main id ="map"></main>
+    <div class="description-of-item hidden">
+        <section class="item-image">
+            <img class="image-of-item">
+        </section>
+        <section class="item-text">
+            <div class="name-of-item"></div>
+            <div class="quantity-of-item"></div>
+            <div class="location-of-item"></div>
+            <div class="owner-of-item"></div>
+            <div class="expiration-date-of-item"></div>
+            <div class="pickup-date-of-item"></div>
+            <div class="pickup-time-of-item"></div>
+        <% if (user) { %>
+        <form action="/reservation" method="post" class="reservation">
+            <input type="hidden" name="item_id" class="post-trashure-item-id" value="">
+            <button class="reserve-btn hidden" >Reserve Trashure</button>
+        </form> 
+        <form action="/reservation/delete" method="post">
+            <input type="hidden" name="item_id" class="delete-trashure-item-id" value="">
+            <button class="unreserve-btn hidden">Unreserve Trashure</button>
+        </form>   
+        <% } %>
+    </div>
+
+
+    
+    <script src="/trashure-client.js"></script>
+</body>
+</html>
