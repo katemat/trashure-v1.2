@@ -148,7 +148,7 @@ function getMap() {
         userLocation.latitude,
         userLocation.longitude
       ),
-      zoom: 12,
+      zoom: 10,
       credentials:
         'AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw',
     });
