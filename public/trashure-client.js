@@ -151,7 +151,7 @@ function getMap() {
 
     var center = map.getCenter();
 
-    const url = 'https://trashure-app.herokuapp.com/trashure_items';
+    const url = 'https://trashure-app.herokuapp.com/api/trashure_items';
     // const url = 'http://localhost:8080/api/trashure_items';
 
     axios.get(url).then((res) => {
