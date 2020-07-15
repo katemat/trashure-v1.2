@@ -1,14 +1,17 @@
-Trashure App, v. 1.0.0
+# Trashure App, v. 1.0.0
 
-Team Project
+## Team Project
 
 [Try it now](https://trashure.herokuapp.com/)
 
-Overview
+### Overview
 
-🏘 Are you moving out soon? 🚚 Still have some stuff you love but not able to take with you? 🎫 Have spare tickets fot tonight? Give it to someone for free! Share your Trashure!
+🏘 Are you moving out soon?
+🚚 Still have some stuff you love but not able to take with you?
+🎫 Have spare tickets fot tonight? Give it to someone for free!
+Share your Trashure!
 
-Features
+### Features
 
 - User can see on the map 🌏 any Trashure Items available in nearby area (user-geolocation feature is implemented)
 - User can sign up and login
@@ -27,6 +30,7 @@ Features
 - middleware: pg, bcrypt, passport, express-session, method-overide, ejs
 - Heroku for deployment
 - version control system: Git
+- Bing Map API
 - Whimsical for creating storyboards
 - Trello for keeping track of development
 
