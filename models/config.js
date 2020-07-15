@@ -9,7 +9,7 @@ if (process.env.PRODUCTION) {
 } else {
   pool = new pg.Pool({
     database: 'trashure',
-    // user: 'admin',
+    user: 'katerina',
     // password: 'hello',
   });
 }
