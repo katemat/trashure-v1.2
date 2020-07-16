@@ -1,91 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Update Trashure Item</title>
-    <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/style2.css">
-    <script type='text/javascript'
-    src='http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw' 
-    async defer></script>
-</head>
-<body>
-    <nav class='page-nav'> 
-        <div class="nav-item"><a href="/"><img class='nav-icon' src="/images/map.png"><p>Home</p></a></div>
-        <div class="nav-item"><a href="/myitems"><img class='nav-icon' src="/images/treasure-chest.png"><p>My Trashure</p></a></div>
-        <div class="nav-item"><a href="/item"><img class='nav-icon' src="/images/new.png"><p>New Trashure</p></a></div>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/style2.css" />
+    <script
+      type="text/javascript"
+      src="https://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw"
+      async
+      defer
+    ></script>
+  </head>
+  <body>
+    <nav class="page-nav">
+      <div class="nav-item">
+        <a href="/"
+          ><img class="nav-icon" src="/images/map.png" />
+          <p>Home</p></a
+        >
+      </div>
+      <div class="nav-item">
+        <a href="/myitems"
+          ><img class="nav-icon" src="/images/treasure-chest.png" />
+          <p>My Trashure</p></a
+        >
+      </div>
+      <div class="nav-item">
+        <a href="/item"
+          ><img class="nav-icon" src="/images/new.png" />
+          <p>New Trashure</p></a
+        >
+      </div>
     </nav>
 
     <!-- converting Date to display safed in DB -->
-    <% today = new Date() %>
-    <% function convertDate(date = today) { %>
-    <% d = new Date(date)%>
-    <% month = '' + (d.getMonth() + 1)%>
-    <% day = '' + d.getDate()%>
-    <% year = d.getFullYear()%>
-    <%if (month.length < 2) %> 
-        <% { month = '0' + month }%>
-    <% return convertedDate = [year, month, day].join('-')%>
-    <% } %>
-    <% savedDateInDB = convertDate(item[0].pickup_date)%>
-    <% currentDate = convertDate()%>
+    <% today = new Date() %> <% function convertDate(date = today) { %> <% d =
+    new Date(date)%> <% month = '' + (d.getMonth() + 1)%> <% day = '' +
+    d.getDate()%> <% year = d.getFullYear()%> <%if (month.length < 2) %> <% {
+    month = '0' + month }%> <% return convertedDate = [year, month,
+    day].join('-')%> <% } %> <% savedDateInDB =
+    convertDate(item[0].pickup_date)%> <% currentDate = convertDate()%>
 
     <h1 class="form-h1">Update Item</h1>
     <div class="update-form-div">
-        <form class="update-form" action="/item/<%=item[0].id%>?_method=PUT"  method="POST">
-            <input type="hidden" name="_method" value="PUT">
-            <div>
-                <label for="">Trashure Title: </label>
-                <input type="text" class="item-name" name="name" value="<%=item[0].name%>">
-            </div>
-            <div>
-                <label for="">Trashure Type: </label>
-                
-                <select class="selection" name="item_type" required>
-                    <!-- to keep selected item_type showing before editing item details -->
-                    <% const types = ["Furniture", "Book", "Food", "Ticket", "Others"] %>
-                    <% types.forEach((option, index) => { %>
-                        <% if ((item[0].item_type) == option) { %>
-                        <option value="<%= option %>" <%= "selected"%>><%= option %></option>
-                        <% } else  { %>
-                        <option value="<%= option %>"><%= option %></option>
-                        <% } %>  
-                    <% }) %>
-                </select>
-            </div>
-            <div>
-                <label for="">Place the pin where the item is located</label>
-                <input type="text" class="item-location" name="address" readonly placeholder="address will be displayed here" value="<%= item[0].address%>">
-                <input type="hidden" name="latitude" class="lat" value="<%= item[0].lat %>">
-                <input type="hidden" name="longitude" class="long" value="<%= item[0].long %>">
-                <div class="item-map"></div>
-            </div>
-            <div>
-                <label for="">Quantity: </label>
-                <input type="text" class="quantity" name="quantity" value="<%=item[0].quantity%>">
-            </div>
-            <div>
-                <label for="">Image URL</label>
-                <input type="text" class="image-url" name="image_url" value="<%=item[0].image_url%>">
-            </div>
-            <div>
-                <label for="">Pickup Date: </label>
-                <input type="date" class="pickup-date" name="pickup_date"
-                min="<%=currentDate%>" value="<%=savedDateInDB%>">
-            </div>
-            <div>
-                <label for="">Pickup Time, from</label>
-                <input type="time" class="pickup_start_time" name="pickup_start_time" value="<%=item[0].pickup_start_time%>" required>
-            </div>
-            <div>
-                <label for="">Pick up Time, to</label>
-                <input type="time" class="pickup_end_time" name="pickup_end_time" value="<%=item[0].pickup_end_time%>" required>
-            </div>
-            <button class="update-btn">Submit Changes</button> 
-        </form>
+      <form
+        class="update-form"
+        action="/item/<%=item[0].id%>?_method=PUT"
+        method="POST"
+      >
+        <input type="hidden" name="_method" value="PUT" />
+        <div>
+          <label for="">Trashure Title: </label>
+          <input
+            type="text"
+            class="item-name"
+            name="name"
+            value="<%=item[0].name%>"
+          />
+        </div>
+        <div>
+          <label for="">Trashure Type: </label>
+
+          <select class="selection" name="item_type" required>
+            <!-- to keep selected item_type showing before editing item details -->
+            <% const types = ["Furniture", "Book", "Food", "Ticket", "Others"]
+            %> <% types.forEach((option, index) => { %> <% if
+            ((item[0].item_type) == option) { %>
+            <option value="<%= option %>" <%="selected" %
+              >><%= option %></option
+            >
+            <% } else { %>
+            <option value="<%= option %>"><%= option %></option>
+            <% } %> <% }) %>
+          </select>
+        </div>
+        <div>
+          <label for="">Place the pin where the item is located</label>
+          <input
+            type="text"
+            class="item-location"
+            name="address"
+            readonly
+            placeholder="address will be displayed here"
+            value="<%= item[0].address%>"
+          />
+          <input
+            type="hidden"
+            name="latitude"
+            class="lat"
+            value="<%= item[0].lat %>"
+          />
+          <input
+            type="hidden"
+            name="longitude"
+            class="long"
+            value="<%= item[0].long %>"
+          />
+          <div class="item-map"></div>
+        </div>
+        <div>
+          <label for="">Quantity: </label>
+          <input
+            type="text"
+            class="quantity"
+            name="quantity"
+            value="<%=item[0].quantity%>"
+          />
+        </div>
+        <div>
+          <label for="">Image URL</label>
+          <input
+            type="text"
+            class="image-url"
+            name="image_url"
+            value="<%=item[0].image_url%>"
+          />
+        </div>
+        <div>
+          <label for="">Pickup Date: </label>
+          <input
+            type="date"
+            class="pickup-date"
+            name="pickup_date"
+            min="<%=currentDate%>"
+            value="<%=savedDateInDB%>"
+          />
+        </div>
+        <div>
+          <label for="">Pickup Time, from</label>
+          <input
+            type="time"
+            class="pickup_start_time"
+            name="pickup_start_time"
+            value="<%=item[0].pickup_start_time%>"
+            required
+          />
+        </div>
+        <div>
+          <label for="">Pick up Time, to</label>
+          <input
+            type="time"
+            class="pickup_end_time"
+            name="pickup_end_time"
+            value="<%=item[0].pickup_end_time%>"
+            required
+          />
+        </div>
+        <button class="update-btn">Submit Changes</button>
+      </form>
     </div>
     <script src="/item.js"></script>
-</body>
+  </body>
 </html>
