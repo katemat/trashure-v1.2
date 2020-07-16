@@ -70,7 +70,7 @@ function showPosition(position, cb) {
 
 // Fetches information to be displayed
 const handlePinClick = function (e) {
-  const url = `https://trashure-app.herokuapp.com/api/trashure_items/${e.target.metadata.id}`;
+  const url = `http://trashure-app.herokuapp.com/api/trashure_items/${e.target.metadata.id}`;
   // const url = `http://localhost:8080/api/trashure_items/${e.target.metadata.id}`;
   axios.get(url).then((res) => {
     res.data.forEach(function (data) {
@@ -90,7 +90,7 @@ const handlePinClick = function (e) {
 
       reverseGeocode(fakevent);
 
-      const url = `https://trashure-app.herokuapp.com/api/users/${data.owner_id}`;
+      const url = `http://trashure-app.herokuapp.com/api/users/${data.owner_id}`;
       // const url = `http://localhost:8080/api/users/${data.owner_id}`;
       axios.get(url).then((res) => {
         document.querySelector(
@@ -155,7 +155,7 @@ function getMap() {
 
     var center = map.getCenter();
 
-    const url = 'https://trashure-app.herokuapp.com/api/trashure_items';
+    const url = 'http://trashure-app.herokuapp.com/api/trashure_items';
     // const url = 'http://localhost:8080/api/trashure_items';
 
     axios.get(url).then((res) => {
