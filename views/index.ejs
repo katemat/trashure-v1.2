@@ -20,18 +20,20 @@
                 
                 <% if (!user) { %>
                     <div class = "buttons">
-                        <form action="/signup">
-                            <button>SIGN UP</button>
-                        </form>
                         <form action="/login">
                             <button>LOG IN</button>
                         </form>
+                        <form action="/signup">
+                            <button>SIGN UP</button>
+                        </form>
                     </div>
                 <% } else { %>
+                    <div class="greeting">
                     <p class="user-name">Hello, <%= user.username %></p>
                     <form action="/logout">
                         <button>LOG OUT</button>
                     </form>
+                </div>
                 <% } %>
                 
         </section>

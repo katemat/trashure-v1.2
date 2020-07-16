@@ -1,8 +1,9 @@
 .create-form-div,
 .update-form-div {
-  background-color: rgb(241, 237, 237);
-  box-shadow: 1px 0px 40px 0px rgba(78, 108, 246, 0.99);
-  min-width: 700px;
+  background-color: var(--clr-light);
+  box-shadow: var(--bx-sh);
+  width: 100%;
+  margin: 0 auto;
 }
 
 .create-form-div input,
@@ -25,16 +26,17 @@
   width: 30%;
   margin: 10px auto;
   padding: 5px;
-  border: 1px solid black;
+  border: var(--border);
   border-radius: 3px;
   font-size: 1.25em;
-  background-color: aquamarine;
+  background: var(--bg-btn);
 }
 
 .create-btn:hover,
 .update-btn:hover {
-  background-color: rgb(82, 199, 160);
+  background: var(--bg-btn-hov);
   cursor: pointer;
+  color: var(--clr-dark);
 }
 
 .selection {

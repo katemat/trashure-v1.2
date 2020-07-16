@@ -16,17 +16,31 @@
     </nav>
     <h2 class="view-items">View my items</h2>
 
+    <% function convertDate(date = today) { %> 
+        <% d = new Date(date)%> 
+        <% month = '' + (d.getMonth() + 1)%> 
+        <% day = '' + d.getDate()%> 
+        <% year = d.getFullYear()%> 
+        <%if (month.length < 2) %> 
+            <% { month = '0' + month }%> 
+            <% return [day, month, year
+            ].join('-')%> 
+        <% } %> 
+        
+
     <% items.forEach(function(item){ %>
         <div class = "my-items-box">
             <img src="<%= item.image_url%>" alt="">
-            <% if (item.status === "reserved") { %>
+            <% if (item.status !== "reserved") { %>
                 <div class = "item-box-text">
             <% } else { %>
                 <div class = "item-box-text reserved">
             <% } %>
+           
                 <p >Name: <%= item.name %></p>
                 <p>Item type: <%= item.item_type %></p>
-                <p>Pickup date: <%= item.pickup_date %></p>
+                <% savedDateInDB = convertDate(item.pickup_date)%>
+                <p>Pickup date: <%= savedDateInDB %></p>
                 <p>Item status: <%= item.status %></p>
                 <p>Item address: <%= item.address %></p>
             </div>
