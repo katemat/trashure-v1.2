@@ -52,11 +52,25 @@ const reverseGeocode = function (e) {
     //Make the reverse geocode request.
     searchManager.reverseGeocode(searchRequest);
 
+    // var greenPin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(center.latitude, center.longitude - 0.1), { color: '#0f0', draggable: true });
+    // map.entities.push(greenPin);
+
     var pin = new Microsoft.Maps.Pushpin(e.location, {
+      draggable: true,
       // title: address
       // color: 'green'
     });
     map.entities.push(pin);
+
+    Microsoft.Maps.Events.addHandler(pin, 'drag', function (e) {
+      highlight('pushpinDrag', e);
+    });
+    Microsoft.Maps.Events.addHandler(pin, 'dragend', function (e) {
+      highlight('pushpinDragEnd', e);
+    });
+    Microsoft.Maps.Events.addHandler(pin, 'dragstart', function (e) {
+      highlight('pushpinDragStart', e);
+    });
     console.log(map.entities);
   }
 };
