@@ -23,7 +23,7 @@ const reverseGeocode = function (e) {
     });
   } else {
     var searchRequest = {
-      // local arguement to be passed in
+      // local argument to be passed in
       location: e.location,
       callback: function (res) {
         //Tell the user the name of the result.
@@ -52,25 +52,11 @@ const reverseGeocode = function (e) {
     //Make the reverse geocode request.
     searchManager.reverseGeocode(searchRequest);
 
-    // var greenPin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(center.latitude, center.longitude - 0.1), { color: '#0f0', draggable: true });
-    // map.entities.push(greenPin);
-
     var pin = new Microsoft.Maps.Pushpin(e.location, {
-      draggable: true,
-      // title: address
+      //   title: address,
       // color: 'green'
     });
     map.entities.push(pin);
-
-    Microsoft.Maps.Events.addHandler(pin, 'drag', function (e) {
-      highlight('pushpinDrag', e);
-    });
-    Microsoft.Maps.Events.addHandler(pin, 'dragend', function (e) {
-      highlight('pushpinDragEnd', e);
-    });
-    Microsoft.Maps.Events.addHandler(pin, 'dragstart', function (e) {
-      highlight('pushpinDragStart', e);
-    });
     console.log(map.entities);
   }
 };
@@ -82,6 +68,34 @@ function getMap() {
     credentials:
       'AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw',
   });
+
+  Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+    callback: function () {
+      var options = {
+        maxResults: 3,
+        map: map,
+      };
+      var manager = new Microsoft.Maps.AutosuggestManager(options);
+      manager.attachAutosuggest(
+        '.item-location',
+        '#searchBoxContainer',
+        selectedSuggestion
+      );
+    },
+  });
+
+  function selectedSuggestion(suggestionResult) {
+    map.entities.clear();
+
+    var pin = new Microsoft.Maps.Pushpin(suggestionResult.location);
+    map.entities.push(pin);
+
+    itemAddress.value = suggestionResult.formattedSuggestion;
+    itemLatitude.value = suggestionResult.location.latitude;
+    itemLongitude.value = suggestionResult.location.longitude;
+
+    map.setView({ bounds: suggestionResult.bestView });
+  }
 
   Microsoft.Maps.Events.addHandler(map, 'click', (e) => {
     reverseGeocode(e);

@@ -60,19 +60,19 @@
             <option value="Others">Others</option>
           </select>
         </div>
-        <div>
+        <div id="searchBoxContainer">
           <label for="">Place the pin where the item is located</label>
           <input
             type="text"
             class="item-location"
             name="address"
-            readonly
             placeholder="address will be displayed here"
           />
-          <input type="hidden" name="latitude" class="lat" />
-          <input type="hidden" name="longitude" class="long" />
-          <div class="item-map"></div>
         </div>
+        <input type="hidden" name="latitude" class="lat" />
+        <input type="hidden" name="longitude" class="long" />
+        <div class="item-map"></div>
+
         <div>
           <label for="">Quantity: </label>
           <input type="text" class="quantity" name="quantity" />
