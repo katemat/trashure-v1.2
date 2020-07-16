@@ -78,11 +78,11 @@
             <% const types = ["Furniture", "Book", "Food", "Ticket", "Others"]
             %> <% types.forEach((option, index) => { %> <% if
             ((item[0].item_type) == option) { %>
-            <option value="<%= option %>" <%="selected" %
-              >><%= option %></option
-            >
+            <option value="<%= option %>" <%="selected" %>
+              <%= option %>>
+            </option>
             <% } else { %>
-            <option value="<%= option %>"><%= option %></option>
+            <option value="<%= option %>"> <%= option %></option>
             <% } %> <% }) %>
           </select>
         </div>
