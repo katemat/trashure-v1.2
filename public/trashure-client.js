@@ -71,7 +71,7 @@ function showPosition(position, cb) {
 // Fetches information to be displayed
 const handlePinClick = function (e) {
   const url = `https://trashure-app.herokuapp.com/api/trashure_items/${e.target.metadata.id}`;
-  // const url = `http://localhost:8080/api/trashure_items/${e.target.metadata.id}`;
+  const url = `http://localhost:8080/api/trashure_items/${e.target.metadata.id}`;
   axios.get(url).then((res) => {
     res.data.forEach(function (data) {
       document.querySelector('.description-of-item').classList.remove('hidden');
